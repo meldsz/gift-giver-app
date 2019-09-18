@@ -29,7 +29,13 @@ describe('App', () => {
         it('renders gifts on the render on clicking add gift button', () => {
             expect(app.find('.gift-list').children().length).toEqual(1);
         });
+
+        it('renders Gift', () => {
+            expect(app.find('Gift').exists()).toBe(true);
+        });
     });
+
+    
 
 
 });
