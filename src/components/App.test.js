@@ -3,6 +3,7 @@ import { shallow } from "enzyme";
 import App from "./App";
 
 describe('App', () => {
+    const id = 1;
     const app = shallow(<App />);
     it('app renders correctly', () => {
         expect(app).toMatchSnapshot();
@@ -23,7 +24,7 @@ describe('App', () => {
         });
 
         it('adds a gift to the `state` when the add gift button is clicked', () => {
-            expect(app.state().gifts).toEqual([{ id: 1 }]);
+            expect(app.state().gifts).toEqual([{ id }]);
         });
 
         it('renders gifts on the render on clicking add gift button', () => {
@@ -33,9 +34,20 @@ describe('App', () => {
         it('renders Gift', () => {
             expect(app.find('Gift').exists()).toBe(true);
         });
+
+        describe('when the user removes a gift', () => {
+            beforeEach(() => {
+                app.instance().removeGift(id);
+            });
+
+            it('removes gift from the state', () => {
+                expect(app.state().gifts).toEqual([]);
+            })
+        });
     });
 
-    
+
+
 
 
 });

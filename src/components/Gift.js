@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, FormGroup, FormControl } from "react-bootstrap";
+import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
 class Gift extends Component {
     constructor() {
         super();
@@ -25,6 +25,7 @@ class Gift extends Component {
                             onChange={(e) => this.setState({ present: e.target.value })} />
                     </FormGroup>
                 </Form>
+                <Button className="btn-remove" onClick={() => this.props.removeGift(this.props.gift.id)}>Remove Gift</Button>
             </div>
         )
     }

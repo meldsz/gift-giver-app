@@ -3,7 +3,10 @@ import { shallow } from "enzyme";
 import Gift from './Gift';
 
 describe('Gift', () => {
-    const giftWrapper = shallow(<Gift />);
+    const mockRemove = jest.fn();
+    const id = 1;
+    const props = { gift: { id }, removeGift: mockRemove };
+    const giftWrapper = shallow(<Gift {...props} />);
     it('renders properly', () => {
         expect(giftWrapper).toMatchSnapshot();
     });
@@ -31,8 +34,18 @@ describe('Gift', () => {
                 .simulate('change', { target: { value: present } });
         });
 
-        it('updates present in the state',()=>{
+        it('updates present in the state', () => {
             expect(giftWrapper.state().present).toEqual(present);
         });
+    });
+
+    describe('when user clicks the remove gift button', () => {
+        beforeEach(() => {
+            giftWrapper.find('.btn-remove').simulate('click');
+        });
+
+        it('calls the removeGift callback in props', () => {
+            expect(mockRemove).toHaveBeenCalledWith(id);
+        })
     });
 });
